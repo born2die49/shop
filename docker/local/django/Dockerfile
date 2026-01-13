@@ -56,14 +56,14 @@ RUN sed -i 's/\r$//g' /entrypoint && chmod +x /entrypoint
 COPY --chown=django:django ./docker/local/django/start.sh /start
 RUN sed -i 's/\r$//g' /start && chmod +x /start
 
-# COPY --chown=django:django ./docker/local/django/celery/worker/start.sh /start-celeryworker
-# RUN sed -i 's/\r$//g' /start-celeryworker && chmod +x /start-celeryworker
+COPY --chown=django:django ./docker/local/django/celery/worker/start.sh /start-celeryworker
+RUN sed -i 's/\r$//g' /start-celeryworker && chmod +x /start-celeryworker
 
-# COPY --chown=django:django ./docker/local/django/celery/beat/start.sh /start-celerybeat
-# RUN sed -i 's/\r$//g' /start-celerybeat && chmod +x /start-celerybeat
+COPY --chown=django:django ./docker/local/django/celery/beat/start.sh /start-celerybeat
+RUN sed -i 's/\r$//g' /start-celerybeat && chmod +x /start-celerybeat
 
-# COPY --chown=django:django ./docker/local/django/celery/flower/start.sh /start-flower
-# RUN sed -i 's/\r$//g' /start-flower && chmod +x /start-flower
+COPY --chown=django:django ./docker/local/django/celery/flower/start.sh /start-flower
+RUN sed -i 's/\r$//g' /start-flower && chmod +x /start-flower
 
 # --- The step that changes most frequently is LAST ---
 # Copy the application source code
