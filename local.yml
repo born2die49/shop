@@ -1,0 +1,42 @@
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+    image: shop_prod_app
+    container_name: shop_prod_app
+    volumes:
+      - .:/app:z
+      - ./staticfiles:/app/staticfiles
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.envs/.env.local
+    depends_on:
+      - mailpit
+    command: /start
+    networks:
+      - shop_prod_nw
+
+  mailpit:
+    image: docker.io/axllent/mailpit:v1.28
+    container_name: ask_prod_mailpit
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    volumes:
+      - ask_prod_mailpit_data:/data
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATA_FILE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+        - shop_prod_nw
+
+networks:
+  shop_prod_nw:
+    external: true
+
+volumes:
+  ask_prod_mailpit_data: {}
