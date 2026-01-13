@@ -20,12 +20,12 @@ services:
 
   mailpit:
     image: docker.io/axllent/mailpit:v1.28
-    container_name: ask_prod_mailpit
+    container_name: shop_prod_mailpit
     ports:
       - "8025:8025"
       - "1025:1025"
     volumes:
-      - ask_prod_mailpit_data:/data
+      - shop_prod_mailpit_data:/data
     environment:
       MP_MAX_MESSAGES: 5000
       MP_DATA_FILE: /data/mailpit.db
@@ -34,9 +34,23 @@ services:
     networks:
         - shop_prod_nw
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./docker/local/Dockerfile
+    container_name: shop_frontend
+    image: shop_frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - shop_prod_nw
+
 networks:
   shop_prod_nw:
     external: true
 
 volumes:
-  ask_prod_mailpit_data: {}
+  shop_prod_mailpit_data: {}
