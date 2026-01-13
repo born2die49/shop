@@ -146,3 +146,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
 
 TAGGIT_CASE_INSENSITIVE = True
+
+AUTH_USER_MODEL = "user.User"
