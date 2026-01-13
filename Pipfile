@@ -5,8 +5,30 @@ name = "pypi"
 
 [packages]
 django = "*"
+python-dotenv = "*"
+djangorestframework = "*"
+django-autoslug = "*"
+django-countries = "*"
+django-phonenumber-field = "*"
+phonenumbers = "*"
+drf-yasg = "*"
+argon2-cffi = "*"
+djoser = "*"
+pillow = "*"
+django-filter = "*"
+django-celery-email = "*"
+django-celery-beat = "*"
+redis = "*"
+celery = "*"
+flower = "*"
+django-taggit = "*"
+boto3 = "*"
+django-storages = "*"
 
 [dev-packages]
+psycopg2-binary = "*"
+watchfiles = "*"
+black = "*"
 
 [requires]
 python_version = "3.12"
