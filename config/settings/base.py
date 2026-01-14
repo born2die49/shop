@@ -1,5 +1,6 @@
 from pathlib import Path
 from os import getenv, path
+from datetime import timedelta
 
 from dotenv import load_dotenv
 
@@ -198,3 +199,66 @@ STORAGES = {
 
 # URL configuration to read files from s3
 MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/"
+
+COOKIE_NAME = "access"
+COOKIE_SAMESITE = "Lax"
+COOKIE_PATH = "/"
+COOKIE_HTTPONLY = True
+COOKIE_SECURE = getenv("COOKIE_SECURE", "True") == "True"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "core_apps.common.cookie_auth.CookieAuthentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+      "rest_framework.permissions.IsAuthenticated",
+    ),
+   "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+   "DEFAULT_FILTER_BACKENDS": [
+      "django_filters.rest_framework.DjangoFilterBackend",
+   ],
+   "PAGE_SIZE": 20,
+   "DEFAULT_THROTTLE_CLASSES": (
+       "rest_framework.throttling.AnonRateThrottle",
+       "rest_framework.throttling.UserRateThrottle"
+   ),
+   "DEFAULT_THROTTLE_RATES": {
+       "anon": "1000/day",
+       "user": "5000/day",
+   },
+}
+
+SIMPLE_JWT = {
+    "SIGNING_KEY": getenv("SIGNING_KEY"),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
+    "ROTATE_REFRESH_TOKENS": True,
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+}
+
+DJOSER = {
+    "USER_ID_FIELD": "id",
+    "LOGIN_FIELD": "email",
+    "TOKEN_MODEL": None,
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SEND_ACTIVATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "ACTIVATION_URL": "activate/{uid}/{token}",
+    "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
+    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": getenv("REDIRECT_URIS", "").split(","),
+    "SERIALIZERS": {
+        "user_create": "core_apps.user.serializers.CreateUserSerializer",
+        "current_user": "core_apps.user.serializers.CustomUserSerializer"
+    },
+}
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv("GOOGLE_CLIENT_ID")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = getenv("GOOGLE_CLIENT_SECRET")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+    "openid",
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ["first_name", "last_name"]
