@@ -230,7 +230,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     "SIGNING_KEY": getenv("SIGNING_KEY"),
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "ROTATE_REFRESH_TOKENS": True,
     "USER_ID_FIELD": "id",
@@ -249,8 +249,7 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": getenv("REDIRECT_URIS", "").split(","),
     "SERIALIZERS": {
-        "user_create": "core_apps.user.serializers.CreateUserSerializer",
-        "current_user": "core_apps.user.serializers.CustomUserSerializer"
+        "user_create": "core_apps.user.serializers.CreateUserSerializer"
     },
 }
 

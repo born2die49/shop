@@ -1,13 +1,10 @@
 from django.contrib.auth import get_user_model
-from djoser.serializers import UserCreateSerializer, UserSerializer
-from django_countries.serializer_fields import CountryField
-from phonenumber_field.serializerfields import PhoneNumberField
-from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer
 
 User = get_user_model()
 
-class CreateUserSerializer(UserCreateSerializer):
+class CreateCustomerSerializer(UserCreateSerializer):
   class Meta(UserCreateSerializer.Meta):
     model = User
-    fields = ["id", "username", "first_name", "last_name", "password"]
+    fields = ["id", "username", "email", "first_name", "last_name", "password"]
   
