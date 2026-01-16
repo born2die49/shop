@@ -9,11 +9,8 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import AccessToken
 from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
-from rest_framework.permissions import AllowAny
-from djoser.signals import user_registered
 
 from core_apps.common.utils import set_auth_cookies
-from core_apps.user.serializers import CreateCustomerSerializer
 
 User = get_user_model()
 logger = logging.getLogger(__name__)
