@@ -249,7 +249,8 @@ DJOSER = {
     "PASSWORD_RESET_CONFIRM_URL": "password-reset/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": getenv("REDIRECT_URIS", "").split(","),
     "SERIALIZERS": {
-        "user_create": "core_apps.user.serializers.CreateUserSerializer"
+        "user_create": "core_apps.user.serializers.CreateUserSerializer",
+        "current_user": "core_apps.user.serializers.CustomUserSerializer"
     },
 }
 
