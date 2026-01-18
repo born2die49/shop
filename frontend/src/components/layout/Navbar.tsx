@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { ModeToggle } from './mode-toggle';
 
 export default function Navbar() {
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-gray-300/80 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/80">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-gray-300/80 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Logo Section */}
@@ -19,6 +20,9 @@ export default function Navbar() {
 
         {/* Right Side - Auth Buttons */}
         <div className="flex items-center gap-4">
+          {/* Theme Toggle */}
+          <ModeToggle />
+
           <Link 
             href="/login" 
             className="text-sm font-googleSans font-medium text-gray-700 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors"

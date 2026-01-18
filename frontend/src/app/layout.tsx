@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { googleSans, roboto } from "@/lib/fonts";
 import Navbar from "@/components/layout/Navbar";
+import { ThemeProvider } from "@/components/layout/theme-provider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -30,8 +31,15 @@ export default function RootLayout({
       <body
         className={`${googleSans.variable} ${roboto.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
