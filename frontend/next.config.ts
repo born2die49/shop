@@ -16,13 +16,13 @@ const nextConfig: NextConfig = {
 		],
 	},
 
-  turbopack: {},
+  // turbopack: {},
 
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.watchOptions = {
-        poll: 1000, // Check for changes every 0.1 second
-        aggregateTimeout: 500, // Delay before rebuilding
+        poll: 200, // Check for changes every 0.1 second
+        aggregateTimeout: 100, // Delay before rebuilding
       };
     }
     return config;

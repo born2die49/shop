@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
 import { googleSans, roboto } from "@/lib/fonts";
+import Navbar from "@/components/layout/Navbar";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${googleSans.variable} ${roboto.variable} antialiased`}
       >
+        <Navbar />
         {children}
       </body>
     </html>

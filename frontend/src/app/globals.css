@@ -7,6 +7,12 @@
   --font-roboto: var(--font-roboto);
 }
 
+@layer utilities {
+  .flex-center {
+      @apply flex justify-center items-center
+  }
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

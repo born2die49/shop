@@ -50,6 +50,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    environment:
+      - WATCHPACK_POLLING=true
     networks:
       - shop_prod_nw
 
