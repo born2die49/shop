@@ -14,11 +14,11 @@ export default function Home() {
         <Image src={shop} alt="Shop" fill style={{objectFit: "cover", objectPosition: "center"}}/>
       </div>
       <main className="flex-center relative h-full bg-black/50">
-        <div className="text-center">
-          <h1 className="font-googleSans text-5xl text-amber-200">
+        <div className="text-center -mt-80">
+          <h1 className="font-googleSans xl:text-8xl lg:text-6xl md:text-4xl  text-amber-200">
             Welcome to Shop!
           </h1>
-          <p className="font-roboto text-3xl text-amber-100">
+          <p className="font-roboto xl:text-5xl lg:text-3xl md:text-2xl text-amber-100">
             Shop anything!!
           </p>
         </div>
